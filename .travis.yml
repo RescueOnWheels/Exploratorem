@@ -1,0 +1,15 @@
+language:
+  - node_js
+
+node_js:
+  - 'lts/*'
+
+env:
+  - NODE_ENV=CI
+
+cache:
+  directories:
+    - node_modules
+
+script:
+  - npm run lint
