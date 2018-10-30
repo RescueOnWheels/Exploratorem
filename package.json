@@ -1,16 +1,36 @@
 {
   "name": "exploratorem",
-  "version": "0.0.0",
-  "private": true,
-  "scripts": {
-    "start": "node ./bin/www"
-  },
+  "version": "1.0.0",
+  "description": "Exploratorem is the web interface of the Rover.",
+  "main": "app.js",
   "dependencies": {
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.16.0",
     "hbs": "~4.0.1",
     "http-errors": "~1.6.2",
+    "if-env": "1.0.4",
     "morgan": "~1.9.0"
-  }
+  },
+  "devDependencies": {
+    "eslint": "5.8.0",
+    "eslint-config-airbnb-base": "13.1.0",
+    "eslint-plugin-import": "2.14.0"
+  },
+  "scripts": {
+    "lint": "if-env NODE_ENV=CI && npm run lint: || npm run lint:fix",
+    "lint:": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "start": "node ./bin/www"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RescueOnWheels/Exploratorem.git"
+  },
+  "author": "RescueOnWheels",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/RescueOnWheels/Exploratorem/issues"
+  },
+  "homepage": "https://github.com/RescueOnWheels/Exploratorem#readme"
 }
