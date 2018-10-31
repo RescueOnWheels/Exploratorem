@@ -4,8 +4,8 @@
  * Module dependencies.
  */
 
-var app = require('../app');
-var debug = require('debug')('Exploratorem:Server');
+var app = require('./../app');
+var debug = require('debug')('RRS:Exploratorem:Server');
 var http = require('http');
 
 /**
