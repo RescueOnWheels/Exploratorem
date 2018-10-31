@@ -6,3 +6,17 @@
 [![Inline docs](http://inch-ci.org/github/RescueOnWheels/Exploratorem.svg?branch=master&style=flat-square)](http://inch-ci.org/github/RescueOnWheels/Exploratorem)
 
 The web interface of the [Rover](https://github.com/RescueOnWheels/Rover) Rescue System.
+
+## Table of Contents
+* [Scripts](#scripts)
+
+## Scripts
+### ESLint
+```powershell
+$ npm run lint
+```
+
+### Start
+```powershell
+$ npm start [--debug]
+```
