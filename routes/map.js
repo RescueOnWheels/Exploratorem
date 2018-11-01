@@ -1,10 +1,11 @@
 const express = require('express');
+const path = require('path');
 
 const router = express.Router();
 
-/* GET users listing. */
+/* GET map page. */
 router.get('/', (req, res) => {
-  res.send('respond with a resource');
+  res.sendFile(path.join(`${__dirname}/map.html`));
 });
 
 module.exports = router;
