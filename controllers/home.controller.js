@@ -1,11 +1,13 @@
+/* Dependencies */
 const express = require('express');
-const path = require('path');
 
+/* Constants */
 const router = express.Router();
 
-/* GET map page. */
+/* GET home page. */
 router.get('/', (req, res) => {
-  res.sendFile(path.join(`${__dirname}/map.html`));
+  res.render('index', { title: 'Express' });
 });
 
+/* Exports */
 module.exports = router;
