@@ -1,3 +1,5 @@
+/* Dependencies */
+const helmet = require('helmet');
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -8,6 +10,9 @@ const indexRouter = require('./routes/index');
 const mapRouter = require('./routes/map');
 
 const app = express();
+
+/* Helmet helps you secure your Express apps by setting various HTTP headers. */
+app.use(helmet());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
