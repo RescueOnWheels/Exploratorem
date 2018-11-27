@@ -1,41 +1,36 @@
-const createError = require('http-errors');
+/* Dependencies */
 const express = require('express');
+const helmet = require('helmet');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-
-const indexRouter = require('./routes/index');
-const mapRouter = require('./routes/map');
+const controllers = require('./controllers');
 
 const app = express();
 
-// view engine setup
+/* Helmet helps you secure your Express apps by setting various HTTP headers. */
+app.use(helmet());
+
+/* Express.js view engine for handlebars.js */
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
+/* HTTP request logger middleware for node.js */
 app.use(logger('dev'));
+
+/* It parses incoming requests with JSON payloads. */
 app.use(express.json());
+
+/* It parses incoming requests with urlencoded payloads. */
 app.use(express.urlencoded({ extended: false }));
+
+/* Parse Cookie header and populate req.cookies with an object keyed by the cookie names. */
 app.use(cookieParser());
+
+/* It serves static files and is based on serve-static. */
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/map', mapRouter);
-
-// catch 404 and forward to error handler
-app.use((req, res, next) => {
-  next(createError(404));
-});
-
-// error handler
-app.use((err, req, res) => {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
+/* Controllers */
+app.use(controllers);
 
 module.exports = app;
