@@ -1,6 +1,7 @@
 /* Dependencies */
 const express = require('express');
 const helmet = require('helmet');
+const compression = require('compression');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
@@ -10,6 +11,9 @@ const app = express();
 
 /* Helmet helps you secure your Express apps by setting various HTTP headers. */
 app.use(helmet());
+
+/* ZLib compression */
+app.use(compression());
 
 /* Express.js view engine for handlebars.js */
 app.set('views', path.join(__dirname, 'views'));

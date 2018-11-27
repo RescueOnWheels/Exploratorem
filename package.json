@@ -4,6 +4,7 @@
   "description": "Exploratorem is the web interface of the Rover.",
   "main": "app.js",
   "dependencies": {
+    "compression": "1.7.3",
     "cookie-parser": "1.4.3",
     "cross-env": "5.2.0",
     "debug": "3.1.0",
