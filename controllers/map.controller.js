@@ -6,7 +6,7 @@ const router = express.Router();
 
 /* GET map page. */
 router.get('/', (req, res) => {
-  res.sendFile(`${__dirname}/map.html`);
+  res.render('map');
 });
 
 /* Exports */
