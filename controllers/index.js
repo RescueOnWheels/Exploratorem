@@ -5,6 +5,7 @@ const createError = require('http-errors');
 /* Controllers */
 const home = require('./home.controller');
 const map = require('./map.controller');
+const dash = require('./dash.controller');
 
 /* Constants */
 const router = express.Router();
@@ -12,6 +13,7 @@ const router = express.Router();
 /* Routes */
 router.use('/', home);
 router.use('/map', map);
+router.use('/dashboard', dash);
 
 // catch 404 and forward to error handler
 router.use((req, res, next) => {
