@@ -22,13 +22,12 @@ term.setOption('cursorBlink', true);
 
 term.addDisposableListener('key', (key, ev) => {
   const printable = !ev.altKey && !ev.altGraphKey && !ev.ctrlKey && !ev.metaKey;
-  console.log(`ev.keycode: ${ev.keyCode}`);
-  console.log(ev);
-
   if (ev.keyCode === 13) {
     term.prompt();
   } else if (ev.keyCode === 8) {
-    term.write('\b \b');
+    if (term._core.buffer.x > 2) {
+      term.write('\b \b');
+    }
   } else if (printable) {
     term.write(key);
   }
