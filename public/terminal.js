@@ -7,6 +7,7 @@ term.open(document.getElementById('terminal'));
 term.write('Hello from \x1B[1;3;31mxterm.js\x1B[0m $ ');
 term.prompt();
 
+// The theme settings and color settings
 const theme = {
   background: '#1E1E1E',
   red: '#EE4B4B',
@@ -17,8 +18,16 @@ const theme = {
   magenta: '#D670D6',
 };
 
-term.setOption('theme', theme);
-term.setOption('cursorBlink', true);
+// Variable options
+const options = {
+  cursorBlink: true,
+  theme,
+};
+
+// Iterate through options and set them
+for (let i = 0; i < Object.keys(options).length; i++) {
+  term.setOption(Object.keys(options)[i], Object.values(options)[i]);
+}
 
 term.addDisposableListener('key', (key, ev) => {
   const printable = !ev.altKey && !ev.altGraphKey && !ev.ctrlKey && !ev.metaKey;
