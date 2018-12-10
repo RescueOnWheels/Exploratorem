@@ -36,7 +36,7 @@
  */
 
 .xterm {
-    font-family: Ubuntu, courier-new, courier, monospace;
+    font-family: 'Share Tech Mono', courier-new, courier, monospace;
     font-feature-settings: "liga" 0;
     position: relative;
     user-select: none;

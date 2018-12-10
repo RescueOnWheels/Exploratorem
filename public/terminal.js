@@ -63,7 +63,7 @@ const options = {
 };
 
 // Iterate through options and set them
-for (let i = 0; i < Object.keys(options).length; i++) {
+for (let i = 0; i < Object.keys(options).length; i += 1) {
   term.setOption(Object.keys(options)[i], Object.values(options)[i]);
 }
 
@@ -72,6 +72,7 @@ term.addDisposableListener('key', (key, ev) => {
   if (ev.keyCode === 13) {
     term.prompt();
   } else if (ev.keyCode === 8) {
+    // eslint-disable-next-line no-underscore-dangle
     if (term._core.buffer.x > 2) {
       term.write('\b \b');
     }
