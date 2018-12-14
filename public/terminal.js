@@ -45,6 +45,7 @@ term.writeln(`Welcome to ${ansi('magenta', 'dora')}`);
 term.writeln(ansi('blue', 'color test 123'));
 term.prompt();
 
+
 // The theme settings and color settings
 const theme = {
   background: '#1E1E1E',
