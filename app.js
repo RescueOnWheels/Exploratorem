@@ -33,6 +33,7 @@ app.use(cookieParser());
 
 /* It serves static files and is based on serve-static. */
 app.use(express.static(path.join(__dirname, 'public')));
+// app.use('/socket.io-client', express.static(`${__dirname}/node_modules/socket.io-client/`));
 
 /* Controllers */
 app.use(controllers);
