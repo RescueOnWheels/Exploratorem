@@ -1,18 +1,5 @@
 <div id="terminal"></div>
 <script src="https://cdn.jsdelivr.net/npm/xterm@3.8.0/dist/xterm.js"></script>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-<script src="terminal.js"></script>
 <script src="/socket.io/socket.io.js"></script>
-<script>
-    var socket = io();
-    var enc = new TextDecoder("utf-8");
-  socket.on('input', (data) => {
-    term.write(enc.decode(data));
-  });
-    
-
-    term.addDisposableListener('data', (data) => {
-      socket.emit('output', data);
-    })
-
-</script>
+<script src="terminal.js"></script>

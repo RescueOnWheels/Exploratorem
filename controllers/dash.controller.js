@@ -13,17 +13,14 @@ router.get('/', (req, res) => {
   io.on('connection', (socket) => {
     const conn = new Client();
     conn.on('ready', () => {
-      console.log('Client :: ready');
+      socket.emit('info', 'Client :: ready');
       conn.shell((err, stream) => {
         if (err) throw err;
         stream.on('close', () => {
-          console.log('Stream :: close');
+          socket.emit('info', 'Stream :: close');
           conn.end();
         }).on('data', (data) => {
           socket.emit('input', data);
-          console.log(`$ ${data}`);
-        }).stderr.on('data', (data) => {
-          console.log(`STDERR: ${data}`);
         });
         socket.on('output', (data) => {
           stream.write(data);

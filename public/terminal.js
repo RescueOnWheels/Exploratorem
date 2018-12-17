@@ -1,5 +1,6 @@
 /**
- * Function for adding effects and color to your terminal string
+ * Function for adding effects and color to your terminal string.
+ * Makes it a bit easier to add color to your terminal msges
  * @param {*} col The color or effect you want to add to your string
  * @param {String} string The string you are trying to add effects to
  */
@@ -30,20 +31,25 @@ function ansi(col, string) {
     default:
       break;
   }
+  return '';
 }
 
+// Initialize xtermjs terminal
 // eslint-disable-next-line no-undef
 const term = new Terminal();
+term.open(document.getElementById('terminal'));
+
+// ¯\_(ツ)_/¯
 term.prompt = () => {
   term.write('\r\n$ ');
 };
-term.open(document.getElementById('terminal'));
-const now = new Date();
-term.writeln(now);
-term.writeln(`Welcome to ${ansi('magenta', 'dora')}`);
 
-term.writeln(ansi('blue', 'color test 123'));
-term.prompt();
+// Write welcome message to the terminal
+// const now = new Date();
+// term.writeln(now);
+// term.writeln(`Welcome to ${ansi('magenta', 'dora')}`);
+// term.writeln(ansi('blue', 'color test 123'));
+// term.prompt();
 
 // The theme settings and color settings
 const theme = {
@@ -67,20 +73,27 @@ for (let i = 0; i < Object.keys(options).length; i += 1) {
   term.setOption(Object.keys(options)[i], Object.values(options)[i]);
 }
 
-// term.addDisposableListener('key', (key, ev) => {
-//   const printable = !ev.altKey && !ev.altGraphKey && !ev.ctrlKey && !ev.metaKey;
-//   if (ev.keyCode === 13) {
-//     term.prompt();
-//   } else if (ev.keyCode === 8) {
-//     // eslint-disable-next-line no-underscore-dangle
-//     if (term._core.buffer.x > 2) {
-//       term.write('\b \b');
-//     }
-//   } else if (printable) {
-//     term.write(key);
-//   }
-// });
+// Create socket client object
+// eslint-disable-next-line no-undef
+const socket = io();
 
-term.addDisposableListener('paste', (data, ev) => {
-  term.write(data);
+// Set text decoder to UTF-8
+const enc = new TextDecoder('utf-8');
+
+// On ssh input event, write data to terminal
+socket.on('input', (data) => {
+  term.write(enc.decode(data));
+});
+
+// When something is typed in the terminal, emit data so it can be transmitted over ssh
+term.addDisposableListener('data', (data) => {
+  socket.emit('output', data);
+});
+
+socket.on('error', (errormsg) => {
+  term.write(ansi('red', `\r\nERROR: ${errormsg}\r\n`));
+});
+
+socket.on('info', (infomsg) => {
+  term.write(ansi('blue', `\r\nINFO: ${infomsg}\r\n`));
 });
