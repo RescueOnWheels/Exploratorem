@@ -10,5 +10,4 @@ io.on('connection', (socket) => {
     console.log('user disconnected');
   });
 });
-console.log('this shit is actually doing something');
 module.exports = io;

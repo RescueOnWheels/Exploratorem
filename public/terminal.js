@@ -45,7 +45,6 @@ term.writeln(`Welcome to ${ansi('magenta', 'dora')}`);
 term.writeln(ansi('blue', 'color test 123'));
 term.prompt();
 
-
 // The theme settings and color settings
 const theme = {
   background: '#1E1E1E',
@@ -68,19 +67,19 @@ for (let i = 0; i < Object.keys(options).length; i += 1) {
   term.setOption(Object.keys(options)[i], Object.values(options)[i]);
 }
 
-term.addDisposableListener('key', (key, ev) => {
-  const printable = !ev.altKey && !ev.altGraphKey && !ev.ctrlKey && !ev.metaKey;
-  if (ev.keyCode === 13) {
-    term.prompt();
-  } else if (ev.keyCode === 8) {
-    // eslint-disable-next-line no-underscore-dangle
-    if (term._core.buffer.x > 2) {
-      term.write('\b \b');
-    }
-  } else if (printable) {
-    term.write(key);
-  }
-});
+// term.addDisposableListener('key', (key, ev) => {
+//   const printable = !ev.altKey && !ev.altGraphKey && !ev.ctrlKey && !ev.metaKey;
+//   if (ev.keyCode === 13) {
+//     term.prompt();
+//   } else if (ev.keyCode === 8) {
+//     // eslint-disable-next-line no-underscore-dangle
+//     if (term._core.buffer.x > 2) {
+//       term.write('\b \b');
+//     }
+//   } else if (printable) {
+//     term.write(key);
+//   }
+// });
 
 term.addDisposableListener('paste', (data, ev) => {
   term.write(data);

@@ -9,7 +9,10 @@
   socket.on('input', (data) => {
     term.write(enc.decode(data));
   });
-    term.on('data', (data) => {
-        socket.emit('output', data);
+    
+
+    term.addDisposableListener('data', (data) => {
+      socket.emit('output', data);
     })
+
 </script>
