@@ -90,7 +90,7 @@ term.addDisposableListener('data', (data) => {
   socket.emit('output', data);
 });
 
-socket.on('error', (errormsg) => {
+socket.on('pierror', (errormsg) => {
   term.write(ansi('red', `\r\nERROR: ${errormsg}\r\n`));
 });
 

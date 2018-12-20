@@ -1,6 +1,7 @@
 /* Dependencies */
 const express = require('express');
 const Client = require('ssh2').Client;
+const isReachable = require('is-reachable');
 const io = require('./io.controller');
 
 /* Constants */
@@ -12,8 +13,15 @@ router.get('/', (req, res) => {
 
   io.on('connection', (socket) => {
     const conn = new Client();
+    conn.on('error', (error) => {
+      conn.end();
+      socket.emit('error', error);
+    });
+
     conn.on('ready', () => {
       socket.emit('info', 'Client :: ready');
+
+      // Starts a shell session for sending and receiving data over sockets
       conn.shell((err, stream) => {
         if (err) throw err;
         stream.on('close', () => {
@@ -26,12 +34,21 @@ router.get('/', (req, res) => {
           stream.write(data);
         });
       });
-    }).connect({
-      host: '172.20.10.8',
-      port: 22,
-      username: 'pi',
-      password: 'raspberry',
     });
+
+    // Checks if the pi is reachable, before attempting to connect to it.
+    (async () => {
+      if ((await isReachable('172.20.10.8'))) {
+        conn.connect({
+          host: '172.20.10.8',
+          port: 22,
+          username: 'pi',
+          password: 'raspberry',
+        });
+      } else {
+        socket.emit('pierror', 'pi unreachable');
+      }
+    })();
   });
 });
 
