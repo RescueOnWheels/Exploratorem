@@ -35,14 +35,19 @@
  *  Default styles for xterm.js
  */
 
+ #terminal {
+    width: 80%;
+    margin: 1em;
+ }
+
 .xterm {
-    font-family: 'Share Tech Mono', courier-new, courier, monospace;
+    font-family: courier-new, courier, monospace;
     font-feature-settings: "liga" 0;
     position: relative;
     user-select: none;
     -ms-user-select: none;
     -webkit-user-select: none;
-    margin: 1em;
+    padding: 1em;
 }
 
 ::-webkit-scrollbar {
@@ -117,9 +122,8 @@
 .xterm .xterm-screen canvas {
     position: absolute;
     left: 0;
+    border-radius: 5px;
     top: 0;
-    border-radius: 5px;   
-    padding: 1em; 
 }
 
 .xterm .xterm-scroll-area {
@@ -148,7 +152,7 @@
     cursor: pointer;
 }
 
-.xterm.xterm-cursor-crosshair {
+.xterm.column-select.focus {
     /* Column selection mode */
     cursor: crosshair;
 }

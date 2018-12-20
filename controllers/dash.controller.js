@@ -22,7 +22,7 @@ router.get('/', (req, res) => {
       socket.emit('info', 'Client :: ready');
 
       // Starts a shell session for sending and receiving data over sockets
-      conn.shell((err, stream) => {
+      conn.shell((err, stream) => { 
         if (err) throw err;
         stream.on('close', () => {
           socket.emit('info', 'Stream :: close');
