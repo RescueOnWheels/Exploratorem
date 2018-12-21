@@ -35,10 +35,9 @@ router.get('/', (req, res) => {
         });
       });
     });
-
     // Checks if the pi is reachable, before attempting to connect to it.
     (async () => {
-      if ((await isReachable('172.20.10.8'))) {
+      if ((await isReachable('172.20.10.8:22'))) {
         conn.connect({
           host: '172.20.10.8',
           port: 22,
