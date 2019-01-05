@@ -22,7 +22,7 @@ router.get('/', (req, res) => {
       socket.emit('info', 'Client :: ready');
 
       // Starts a shell session for sending and receiving data over sockets
-      conn.shell((err, stream) => { 
+      conn.shell((err, stream) => {
         if (err) throw err;
         stream.on('close', () => {
           socket.emit('info', 'Stream :: close');
@@ -35,6 +35,7 @@ router.get('/', (req, res) => {
         });
       });
     });
+
     // Checks if the pi is reachable, before attempting to connect to it.
     (async () => {
       if ((await isReachable('172.20.10.8:22'))) {
