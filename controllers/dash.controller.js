@@ -1,5 +1,6 @@
 /* Dependencies */
 const express = require('express');
+// eslint-disable-next-line prefer-destructuring
 const Client = require('ssh2').Client;
 const isReachable = require('is-reachable');
 const io = require('./io.controller');
